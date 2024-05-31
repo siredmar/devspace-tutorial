@@ -1,0 +1,6 @@
+Dockerfile
+devspace.yaml
+.gitignore
+manifests
+.devspace
+dev

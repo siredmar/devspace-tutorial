@@ -1,0 +1,40 @@
+version: v2beta1
+name: devspace-tutorial
+
+pipelines:
+  dev:
+    run: |-
+      create_deployments --all
+      start_dev app
+  dev-stop:
+    run: |-
+      stop_dev app
+  deploy:
+    run: |-
+      build_images --all -t $(git describe --always)
+      create_deployments --all
+
+images:
+  app:
+    image: mydemo
+    tags:
+      - latest
+    dockerfile: ./Dockerfile
+
+deployments:
+  app:
+    kubectl:
+      manifests:
+        - ./manifests/app.yaml
+
+dev:
+  app:
+    labelSelector:
+      app: mydemo
+    devImage: ghcr.io/loft-sh/devspace-containers/go:1.22-alpine
+    sync:
+      - path: ./
+    ports:
+      - port: "2345"
+      - port: "3333"
+
