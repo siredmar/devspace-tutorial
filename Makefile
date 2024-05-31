@@ -1,4 +1,6 @@
 
+all: build
+
 .PHONY: build
 build:
 	CGO_ENABLED=0 go build -ldflags="-w -s" -gcflags "all=-N -l" -o ./bin/mydemo main.go
