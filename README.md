@@ -22,6 +22,23 @@ devspace deploy
 
 ## Access the application
 
+Port forward the service to access the application:
+
+```sh
+kubectl port-forward svc/mydemo-service 3333:8080
+```
+
+### Listing articles
+    
+```sh
+curl http://localhost:3333/articles
+```  
+
+### Getting an article
+
+```sh
+curl http://localhost:3333/article/{id}
+```
 
 ### Adding articles 
 
@@ -34,24 +51,22 @@ curl -X POST http://localhost:3333/article -H "Content-Type: application/json" -
 }'
 ```
 
-### Listing articles
-    
-```sh
-curl http://localhost:3333/articles
-```    
-
-### Getting an article
-
-```sh
-curl http://localhost:3333/article/{id}
-```
-
 ### Deleting an article
 
 ```sh
-curl -X DELETE http://localhost:3333/article/{id}
+curl -X DELETE http://localhost:3333/article/3
 ```
 
+### Debugging the application
+
+```sh
+devspace dev
+
+# in the new terminal
+make debug
+```
+
+Now connect to the debugger remotely to localhost:2345 in your IDE.
 
 # Docs
 
