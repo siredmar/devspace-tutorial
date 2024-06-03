@@ -12,6 +12,10 @@ import (
 	"github.com/gorilla/mux"
 )
 
+var (
+	buildDate = "UNKNOWN"
+)
+
 // Article - Our struct for all articles
 type Article struct {
 	Id      string `json:"Id"`
@@ -80,6 +84,7 @@ func handleRequests() {
 }
 
 func main() {
+	fmt.Println("build time:", buildDate)
 	fmt.Println("API started")
 	Articles = []Article{
 		Article{Id: "1", Title: "Hello", Desc: "Article Description", Content: "Article Content"},
